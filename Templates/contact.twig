@@ -1,0 +1,10 @@
+{% extends 'base.twig' %}
+{% block content %}
+<h1>ContactList {{name}}</h1>
+    <h2>Contactez-nous</h2>
+        <ul>
+            {% for task in tasks %}
+                <li>{{task}}</li>
+            {% endfor %}
+        </ul>
+{% endblock %}

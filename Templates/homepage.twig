@@ -1,0 +1,15 @@
+{% extends 'base.twig' %}
+{% block content %}
+<h1 class="text-center">Page d'accueil</h1>
+<div class="card">
+    <div class="card-body">
+      <image width="50%" src="https://media.istockphoto.com/id/1170864411/fr/photo/la-liste-%C3%A0-faire-est-coch%C3%A9e-apr%C3%A8s-avoir-termin%C3%A9-une-t%C3%A2che.webp?s=2048x2048&w=is&k=20&c=nZjkJkGjgReL357TyDf3OSZgvPpmpwnOpOQ7uTVWM9o=">
+    </div>
+</div>
+<h2 class="text-center text-success">TaskList</h2>
+  <ul>
+    {% for task in tasks %}
+      <a href="http://localhost/todo_list/task/{{task.id}}"><li class="list-group-item text-center">{{task.title}}</li></a>
+    {% endfor %}
+  </ul>
+{% endblock %}

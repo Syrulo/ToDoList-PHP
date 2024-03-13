@@ -1,0 +1,18 @@
+{% extends 'base.twig' %}
+{% block content %}
+<h1 class="text-center">TaskUpdate</h1>
+<h2 class="text-center text-success">Modifier ma tâche</h2>
+<div class="d-flex justify-content-center mt-5 mb-5">
+    <form method="POST" action="http://localhost/todo_list/public/task/update/{{task.id}}">
+        <input type="text" class="form-control" placeholder="titre" name="title" value="{{task.title}}">
+</div>
+<div class="d-flex justify-content-center mt-3 mb-5">
+<textarea id="description" name="description">
+{{task.description}}
+</textarea>
+</div>
+<div class="d-flex justify-content-center mb-2">
+    <button type="submit" class="btn btn-primary">Valider</button>      
+</div>
+</form>
+{% endblock %}

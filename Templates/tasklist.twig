@@ -1,0 +1,37 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+	<h1 class="text-center"> ToDoList de {{name}} </h1>
+	<h2 class="text-center text-success">Ma TaskList</h2>
+<table class="table table-striped">
+	<thead>
+			<tr>
+				<th scope="col">Tâche</th>
+				<th scope="col">Title</th>
+				<th scope="col">Description</th>
+				<th status="col">Status</th>
+				<th scope="col">Détails</th>
+				<th scope="col">Actions</th>
+        	</tr>
+	</thead>
+	<tbody>	
+	{% for task in tasks %}
+	<tr>
+	<th scope="row">{{task.id}}</th>
+	<td>{{task.title}}</td>
+	<td>{{task.description}}</td>
+	<td>
+	{{task.status}}
+	</td>
+	<td><a href="http://localhost/todo_list/public/task/show/{{task.id}}"><button type="button" class="btn btn-primary">Voir la tâche</button></a></td>
+	<td><a type="button" class="btn btn-success" href="http://localhost/todo_list/public/task/update/status/{{task.id}}">status</a></td>
+	</tr>
+	{% endfor %}	
+</tbody>
+</table>
+	<div class="d-flex justify-content-center mt-3 mb-3">
+	<a href="http://localhost/todo_list/public/task/new/">
+		<button type="button" class="btn btn-success">ajouter une nouvelle tâche</button>
+	</a>
+	</div>
+{% endblock %}

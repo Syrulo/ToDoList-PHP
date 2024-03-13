@@ -1,0 +1,19 @@
+{% extends 'base.twig' %}
+{% block content %} 
+<h1 class="text-center">TaskAdd {{name}}</h1>
+<h2 class="text-center text-success">Ma ToDoList</h2>
+    <div class="d-flex justify-content-center mt-5 mb-5">
+<form method="POST">
+      <input type="text" class="form-control" placeholder="Titre de la tâche" name="title">
+    </div>
+    <div class="d-flex justify-content-center mt-3 mb-3">
+    <textarea id="description" name="description">
+    </textarea>
+    </div>
+    <div class="d-flex justify-content-center mt-5 mb-5">
+        <button type="submit" class="btn btn-primary align-center">Valider</button>       
+    </div>      
+</form>
+</section>
+
+{% endblock %}
