@@ -4,23 +4,56 @@ namespace App\Todolist\Services;
 use PDO;
 use PDOException;
 
+/**
+ * gère la communication avec la BDD
+ */
 class Database{
     // propriétés de notre class
-    private $db_host;
-    private $db_name;
-    private $db_port;
-    private $db_user;
-    private $db_pass;
+
+    /**
+     * @var string
+     */
+    private string $db_host;
+
+    /**
+     * @var string
+     */
+    private string $db_name;
+
+    /**
+     * @var string
+     */
+    private string $db_port;
+
+    /**
+     * @var string
+     */
+    private string $db_user;
+
+    /**
+     * @var string
+     */
+    private string $db_pass;
+
     // propriété DSN 
-    private $db_dsn;
+
+    /**
+     * @var string
+     */
+    private string $db_dsn;
+
     // PDO qu'on connait bien maintenant 
-    private $pdo;  
+
+    /**
+     * @var PDO
+     */
+    private string $pdo;  
     public  function __construct(
-        $db_host= DB_HOST,
-        $db_name = DB_NAME,
-        $db_port = DB_PORT,
-        $db_user = DB_USER,
-        $db_pass = DB_PASS
+        $db_host,
+        $db_name,
+        $db_port,
+        $db_user,
+        $db_pass
     ){
         $this->db_host = $db_host;
         $this->db_name = $db_name;
@@ -29,7 +62,13 @@ class Database{
         $this->db_pass = $db_pass;
         $this->db_dsn = 'mysql:host='.$this->db_host.';port='.$this->db_port.';dbname='.$this->db_name.';charset=utf8';
     }
-    private  function getPDO()
+
+    /**
+     * instancie PDO
+     *
+     * @return PDO
+     */
+    private  function getPDO(): PDO
     {
         // Si PDO n'est pas déjà connecté
         if ($this->pdo === null) {
@@ -47,16 +86,32 @@ class Database{
         // TOUT EST BON POUR AVOIR NOTRE OBJET PDO LES ZAMI(E)S !
         // PDO n'est appelé qu'UNE SEULE FOIS !!!
         return $this->pdo;
-    }
+    }  
     
-    public function selectAll($statement, $params=[]){
+    /**
+     * gère la requête de lecture avec plusieurs résultats
+     *
+     * @param string $statement
+     * @param array $params
+     * @return array
+     */
+    public function selectAll($statement, $params=[]): array
+    {
         $sql = $this->getPDO( )->prepare($statement);
         $sql->execute($params);       
         $data = $sql->fetchAll(PDO::FETCH_ASSOC);
         return $data;
     }
 
-    public function select($statement, $params=[]){
+    /**
+     * gère la requête de lecture avec un seul résultat
+     *
+     * @param string $statement
+     * @param array $params
+     * @return array
+     */
+    public function select($statement, $params=[]): array
+    {
         $sql = $this->getPDO( )->prepare($statement);
         $sql->execute($params);       
         $data = $sql->fetch(PDO::FETCH_ASSOC);

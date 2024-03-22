@@ -1,11 +1,21 @@
 <?php
 namespace App\Todolist\Controllers;
 
+use App\Todolist\Repository\TaskRepository;
+use App\Todolist\Services\Database;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-use App\Todolist\Repository\TaskRepository;
 
-class TaskController extends AbstractController{
+/**
+ * gère les routes concernants les tâches
+ */
+class TaskController extends AbstractController
+{
+    /**
+     * Affiche la liste des tâches
+     *
+     * @return void
+     */
     public function index()
     {
         $taskRepository = new TaskRepository();
@@ -16,6 +26,12 @@ class TaskController extends AbstractController{
         ]);
     }
 
+    /**
+     * permet de créer une nouvelle tâche
+     * et redirige vers la liste des tâches en cas de succès
+     *
+     * @return void
+     */
     public function new()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -24,10 +40,19 @@ class TaskController extends AbstractController{
             $status = "en attente";
             $taskRepository = new TaskRepository();
             $taskRepository->add($title, $status);
+
+            // rediriger vers la page de tâches
             header('location: http://localhost/todo_list/public/task/');
             }
         $this->render('taskadd.twig', [ ]);
     }
+
+    /**
+     * permet d'afficher les détails d'une tâche en particulier
+     * et redirige vers la liste des tâches en cas de succès
+     *
+     * @return void
+     */
     public function show(int $id)
     {
         // déterminer le dossier qui va contenir les fichiers twig
@@ -42,6 +67,12 @@ class TaskController extends AbstractController{
         ]);
     }
 
+     /**
+     * permet de supprimer une tâche en particulier
+     * et redirige vers la liste des tâches en cas de succès
+     *
+     * @return void
+     */
     public function delete(int $id) 
     {
         $taskRepository = new TaskRepository();
@@ -49,6 +80,12 @@ class TaskController extends AbstractController{
         header('location: http://localhost/todo_list/public/task/');    
     }
 
+    /**
+     * permet de mettre à jour une tâche en particulier
+     * et redirige vers la liste des tâches en cas de succès
+     *
+     * @return void
+     */
     public function update(int $id) 
     {       
         $taskRepository = new TaskRepository();
